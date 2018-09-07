@@ -243,8 +243,8 @@ class Coin(object):
         '''Return a Block namedtuple given a raw block and its height.'''
         header = cls.block_header(raw_block, height)
 
-        print("Deserializer is: " + str(cls.DESERIALIZER) + "\n")
-        print("header hash is: " + verus_hash(header)[::-1].hex() + "\n", flush=True)
+        # print("Deserializer is: " + str(cls.DESERIALIZER) + "\n")
+        # print("header hash is: " + verus_hash(header)[::-1].hex() + "\n", flush=True)
 
         txs = cls.DESERIALIZER(raw_block, start=len(header)).read_tx_block()
         return Block(raw_block, header, txs)
@@ -1384,7 +1384,6 @@ class Verus(KomodoMixin, EquihashMixin, Coin):
     NAME = "Verus"
     SHORTNAME = "VRSC"
     NET = "mainnet"
-    DESERIALIZER = lib_tx.DeserializerEquihash
     TX_COUNT = 55000
     TX_COUNT_HEIGHT = 42000
     TX_PER_BLOCK = 2
