@@ -259,7 +259,7 @@ def verus_hash(msg):
         clen = min(32, length - i)
         buf[32:64] = msg[i:i + clen] + [0] * (32 - clen)
         buf[0:32] = haraka512256(buf)
-    return buf[0:32]
+    return bytearray(buf[0:32])
 
 '''
 # set some message bytes
