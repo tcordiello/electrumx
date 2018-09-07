@@ -42,6 +42,7 @@ import electrumx.lib.util as util
 from electrumx.lib.hash import Base58, hash160, double_sha256, hash_to_hex_str
 from electrumx.lib.hash import HASHX_LEN
 from electrumx.lib.script import ScriptPubKey, OpCodes
+from electrumx.lib.verus_hash import verus_hash
 import electrumx.lib.tx as lib_tx
 import electrumx.server.block_processor as block_proc
 import electrumx.server.daemon as daemon
@@ -241,6 +242,10 @@ class Coin(object):
     def block(cls, raw_block, height):
         '''Return a Block namedtuple given a raw block and its height.'''
         header = cls.block_header(raw_block, height)
+
+        # print("Deserializer is: " + str(cls.DESERIALIZER) + "\n")
+        # print("header hash is: " + verus_hash(header)[::-1].hex() + "\n", flush=True)
+
         txs = cls.DESERIALIZER(raw_block, start=len(header)).read_tx_block()
         return Block(raw_block, header, txs)
 
@@ -1088,6 +1093,312 @@ class Monaize(KomodoMixin, EquihashMixin, Coin):
     RPC_PORT = 14337
     REORG_LIMIT = 800
     PEERS = []
+
+class Revs(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Revs"
+    SHORTNAME = "REVS"
+    NET = "mainnet"
+    TX_COUNT = 10000
+    TX_COUNT_HEIGHT = 4800
+    TX_PER_BLOCK = 2
+    RPC_PORT = 10196
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Jumblr(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Jumblr"
+    SHORTNAME = "JUMBLR"
+    NET = "mainnet"
+    TX_COUNT = 10000
+    TX_COUNT_HEIGHT = 5000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 15106
+    REORG_LIMIT = 800
+    PEERS = []
+
+class WirelessCoin(KomodoMixin, EquihashMixin, Coin):
+    NAME = "WirelessCoin"
+    SHORTNAME = "WLC"
+    NET = "mainnet"
+    TX_COUNT = 52000
+    TX_COUNT_HEIGHT = 26000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 12167
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Coqui(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Coqui"
+    SHORTNAME = "COQUI"
+    NET = "mainnet"
+    TX_COUNT = 2000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 14276
+    REORG_LIMIT = 800
+    PEERS = []
+
+class SuperNET(KomodoMixin, EquihashMixin, Coin):
+    NAME = "SuperNET"
+    SHORTNAME = "SUPERNET"
+    NET = "mainnet"
+    TX_COUNT = 10000
+    TX_COUNT_HEIGHT = 5000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 11341
+    REORG_LIMIT = 800
+    PEERS = []
+
+class DEX(KomodoMixin, EquihashMixin, Coin):
+    NAME = "DEX"
+    SHORTNAME = "DEX"
+    NET = "mainnet"
+    TX_COUNT = 3000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 3
+    RPC_PORT = 11890
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Bots(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Bots"
+    SHORTNAME = "BOTS"
+    NET = "mainnet"
+    TX_COUNT = 3000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 3
+    RPC_PORT = 11964
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Crypto(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Crypto"
+    SHORTNAME = "CRYPTO"
+    NET = "mainnet"
+    TX_COUNT = 2000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8516
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Hodl(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Hodl"
+    SHORTNAME = "HODL"
+    NET = "mainnet"
+    TX_COUNT = 2000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 14431
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Pangea(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Pangea"
+    SHORTNAME = "PANGEA"
+    NET = "mainnet"
+    TX_COUNT = 3000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 3
+    RPC_PORT = 14068
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Bet(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Bet"
+    SHORTNAME = "BET"
+    NET = "mainnet"
+    TX_COUNT = 3000
+    TX_COUNT_HEIGHT = 1000
+    TX_PER_BLOCK = 3
+    RPC_PORT = 14250
+    REORG_LIMIT = 800
+    PEERS = []
+
+class mShark(KomodoMixin, EquihashMixin, Coin):
+    NAME = "mShark"
+    SHORTNAME = "MSHARK"
+    NET = "mainnet"
+    TX_COUNT = 200
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8846
+    REORG_LIMIT = 800
+    PEERS = []
+
+class BitcoinHush(KomodoMixin, EquihashMixin, Coin):
+    NAME = "BitcoinHush"
+    SHORTNAME = "BTCH"
+    NET = "mainnet"
+    TX_COUNT = 400
+    TX_COUNT_HEIGHT = 200
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8801
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Utrum(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Utrum"
+    SHORTNAME = "OOT"
+    NET = "mainnet"
+    TX_COUNT = 200
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 12467
+    REORG_LIMIT = 800
+    PEERS = []
+
+class MultiGateway(KomodoMixin, EquihashMixin, Coin):
+    NAME = "MultiGateway"
+    SHORTNAME = "MGW"
+    NET = "mainnet"
+    TX_COUNT = 7500
+    TX_COUNT_HEIGHT = 5000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 12386
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Vote(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Vote"
+    SHORTNAME = "VOTE"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8177
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Vote2018(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Vote2018"
+    SHORTNAME = "VOTE2018"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 10317
+    REORG_LIMIT = 800
+    PEERS = []
+    
+class Ninja(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Ninja"
+    SHORTNAME = "NINJA"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8427
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Beer(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Beer"
+    SHORTNAME = "BEER"
+    NET = "mainnet"
+    TX_COUNT = 18602
+    TX_COUNT_HEIGHT = 4611
+    TX_PER_BLOCK = 4
+    RPC_PORT = 8923
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Pizza(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Pizza"
+    SHORTNAME = "PIZZA"
+    NET = "mainnet"
+    TX_COUNT = 10247
+    TX_COUNT_HEIGHT = 2295
+    TX_PER_BLOCK = 4
+    RPC_PORT = 11116
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Etomic(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Etomic"
+    SHORTNAME = "ETOMIC"
+    NET = "mainnet"
+    TX_COUNT = 17818
+    TX_COUNT_HEIGHT = 11532
+    TX_PER_BLOCK = 2
+    RPC_PORT = 10271
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Blocnation(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Blocnation"
+    SHORTNAME = "BNTN"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 14358
+    REORG_LIMIT = 800
+    PEERS = []
+
+class KeyValue(KomodoMixin, EquihashMixin, Coin):
+    NAME = "KeyValue"
+    SHORTNAME = "KV"
+    NET = "mainnet"
+    TX_COUNT = 63200
+    TX_COUNT_HEIGHT = 46400
+    TX_PER_BLOCK = 2
+    RPC_PORT = 8299
+    REORG_LIMIT = 800
+    PEERS = []
+
+class DSec(KomodoMixin, EquihashMixin, Coin):
+    NAME = "DSec"
+    SHORTNAME = "DSEC"
+    NET = "mainnet"
+    TX_COUNT = 1110
+    TX_COUNT_HEIGHT = 1232
+    TX_PER_BLOCK = 2
+    RPC_PORT = 11557
+    REORG_LIMIT = 800
+    PEERS = []
+
+class ChainZilla(KomodoMixin, EquihashMixin, Coin):
+    NAME = "ChainZilla"
+    SHORTNAME = "ZILLA"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 10041
+    REORG_LIMIT = 800
+    PEERS = []
+
+class CoinCollect(KomodoMixin, EquihashMixin, Coin):
+    NAME = "CoinCollect"
+    SHORTNAME = "CCL"
+    NET = "mainnet"
+    TX_COUNT = 100
+    TX_COUNT_HEIGHT = 100
+    TX_PER_BLOCK = 2
+    RPC_PORT = 20849
+    REORG_LIMIT = 800
+    PEERS = []
+
+class Verus(KomodoMixin, EquihashMixin, Coin):
+    NAME = "Verus"
+    SHORTNAME = "VRSC"
+    NET = "mainnet"
+    TX_COUNT = 55000
+    TX_COUNT_HEIGHT = 42000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 27486
+    REORG_LIMIT = 800
+    PEERS = []
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return hash'''
+        # if this may be the genesis block, use sha256, otherwise, VerusHash
+        if cls.header_prevhash(header) == bytes([0] * 32):
+            return double_sha256(header)
+        else:
+            return verus_hash(header)
 
 
 class Einsteinium(Coin):

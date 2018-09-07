@@ -41,6 +41,11 @@ class Daemon(object):
     '''Handles connections to a daemon at the given URL.'''
 
     WARMING_UP = -28
+    NON_TX = -5
+
+    class NonTxError(Exception):
+        '''Raised when the requested transaction is missing.'''
+
     id_counter = itertools.count()
 
     def __init__(self, coin, url, max_workqueue=10, init_retry=0.25,
@@ -140,6 +145,8 @@ class Daemon(object):
             except aiohttp.ClientConnectionError:
                 log_error('connection problem - is your daemon running?')
                 on_good_message = 'connection restored'
+            except self.NonTxError:
+                log_error('TX not found.')
             except WarmingUpError:
                 log_error('starting up checking blocks.')
                 on_good_message = 'running normally'
@@ -156,6 +163,10 @@ class Daemon(object):
             err = result['error']
             if not err:
                 return result['result']
+            if err.get('code') == self.NON_TX:
+                x = '{"status": "not found"}'
+                res = json.loads(x)
+                return res
             if err.get('code') == self.WARMING_UP:
                 raise WarmingUpError
             raise DaemonError(err)
