@@ -244,7 +244,7 @@ class Coin(object):
         header = cls.block_header(raw_block, height)
 
         print("Deserializer is: " + str(cls.DESERIALIZER) + "\n")
-        print("header hash is: " + verus_hash(header).hex() + "\n")
+        print("header hash is: " + verus_hash(header[::-1]).hex() + "\n", flush=True)
 
         txs = cls.DESERIALIZER(raw_block, start=len(header)).read_tx_block()
         return Block(raw_block, header, txs)
