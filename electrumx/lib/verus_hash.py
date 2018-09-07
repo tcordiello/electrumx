@@ -257,7 +257,7 @@ def verus_hash(msg):
     length = len(msg)
     for i in range(0, length, 32):
         clen = min(32, length - i)
-        buf[32:64] = msg[i:i + clen] + [0] * (32 - clen)
+        buf[32:64] = [b for b in msg[i:i + clen]] + [0] * (32 - clen)
         buf[0:32] = haraka512256(buf)
     return bytes(buf[0:32])
 
@@ -272,7 +272,7 @@ ary.extend(map(ord, s))
 print("= test string = ")
 print(s + "\n")
 print("= verus_hash begins = ")
-op = verus_hash(ary)
+op = verus_hash(bytes(ary))
 print("= verus_hash complete - output = ")
 print(ps(op) + "\n")
 
