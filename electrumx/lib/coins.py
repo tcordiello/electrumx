@@ -35,7 +35,6 @@ import re
 import struct
 from decimal import Decimal
 from hashlib import sha256
-from verus_hash import verus_hash
 from functools import partial
 import base64
 
@@ -43,6 +42,7 @@ import electrumx.lib.util as util
 from electrumx.lib.hash import Base58, hash160, double_sha256, hash_to_hex_str
 from electrumx.lib.hash import HASHX_LEN
 from electrumx.lib.script import ScriptPubKey, OpCodes
+from electrumx.lib.verus_hash import verus_hash
 import electrumx.lib.tx as lib_tx
 import electrumx.server.block_processor as block_proc
 import electrumx.server.daemon as daemon

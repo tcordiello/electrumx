@@ -261,6 +261,7 @@ def verus_hash(msg):
         buf[0:32] = haraka512256(buf)
     return buf[0:32]
 
+'''
 # set some message bytes
 m = [i for i in range(64)]
 
@@ -292,3 +293,4 @@ digest = haraka256256(m)
 # print digest
 print("= haraka-256/256 output bytes =")
 print(ps(digest) + "\n")
+'''
