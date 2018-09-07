@@ -35,6 +35,7 @@ import re
 import struct
 from decimal import Decimal
 from hashlib import sha256
+from verus_hash import verus_hash
 from functools import partial
 import base64
 
@@ -1386,6 +1387,15 @@ class Verus(KomodoMixin, EquihashMixin, Coin):
     RPC_PORT = 27486
     REORG_LIMIT = 800
     PEERS = []
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return hash'''
+        # if this may be the genesis block, use sha256, otherwise, VerusHash
+        if cls.header_prevhash(header) == [0] * 32:
+            return double_sha256(header)
+        else:
+            return verus_hash(header)
 
 
 class Einsteinium(Coin):
