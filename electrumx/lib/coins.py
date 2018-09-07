@@ -242,6 +242,10 @@ class Coin(object):
     def block(cls, raw_block, height):
         '''Return a Block namedtuple given a raw block and its height.'''
         header = cls.block_header(raw_block, height)
+
+        print("Deserializer is: " + str(cls.DESERIALIZER) + "\n")
+        print("header is: " + str(header) + "\n")
+
         txs = cls.DESERIALIZER(raw_block, start=len(header)).read_tx_block()
         return Block(raw_block, header, txs)
 
