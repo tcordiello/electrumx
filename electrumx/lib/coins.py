@@ -1398,7 +1398,7 @@ class Verus(KomodoMixin, EquihashMixin, Coin):
         if cls.header_prevhash(header) == bytes([0] * 32):
             return double_sha256(header)
         else:
-            if (header[0] == 4 and header[4] == 1):
+            if (header[0] == 4 and header[2] == 1):
                 return verus_hash2b(header)
             else:
                 return verus_hash(header)
